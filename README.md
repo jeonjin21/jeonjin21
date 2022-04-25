@@ -1,4 +1,6 @@
-### Hi there 👋
+### 중간고사 대체과제
+## 이렇게 하는 게 맞나
+# 하기 싫다
 
 <!--
 **jeonjin21/jeonjin21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
