@@ -84,6 +84,8 @@ S->1->T의 경로를 살펴보면 c(S,1)=2 , c(1,T)=3이므로 2만큼의 유량
 
 이러한 dfs와 bfs의 예시와 코드는 다음과 같다.
 
+![컴알중간13](https://user-images.githubusercontent.com/101388167/165478158-df9000c9-1e88-496a-a938-758b455d5b66.png)
+
 ``` C
 #include <stdio.h>
 #include <stdlib.h>
@@ -253,7 +255,11 @@ void main()
 	dfs(&g, 'a'); printf("\n");       or  //dfs(&g, 'a'); printf("\n");
 	//bfs(&g, 'a'); printf("\n");         bfs(&g, 'a'); printf("\n"); 
 }
+
+
 ```
+![컴알중간11](https://user-images.githubusercontent.com/101388167/165478131-3bfa3afb-99a4-427f-8e58-e9e88f82d3fa.png)
+![컴알중간12](https://user-images.githubusercontent.com/101388167/165478144-42aaa231-2941-4f1a-b859-0faa6b415081.png)
 
 ## Ford-Fulkerson Algorithm 방식
 
