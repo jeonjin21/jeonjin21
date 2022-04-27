@@ -261,7 +261,7 @@ void main()
 ![컴알중간11](https://user-images.githubusercontent.com/101388167/165478131-3bfa3afb-99a4-427f-8e58-e9e88f82d3fa.png)
 ![컴알중간12](https://user-images.githubusercontent.com/101388167/165478144-42aaa231-2941-4f1a-b859-0faa6b415081.png)
 
-## Ford-Fulkerson Algorithm 동작방식
+## Ford-Fulkerson Algorithm + 동작방식
 
 ```
 1. dfs(깊이 우선 탐색)을 통하여 증가 경로를 탐색하고 찾은 만큼 유량을 흘려 보낸다.
@@ -421,7 +421,7 @@ int main()
 그리고 이러한 포드-풀커슨 알고리즘과 더불어 네트워크 플로우를 구현하는 대표적인 알고리즘이자
 일반적으로 더욱 효율적인 동작을 수행하는 것이 애드몬드-카프 알고리즘이다.
 
-## Edmonds-Karp Algorithm 동작방식 / 성능 비교
+## Edmonds-Karp Algorithm + 동작방식 / 성능 비교
 
 ```
 1. bfs(너비 우선 탐색)을 통하여 증가 경로를 탐색하고 찾은 만큼 유량을 흘려 보낸다.
