@@ -85,8 +85,174 @@ S->1->T의 경로를 살펴보면 c(S,1)=2 , c(1,T)=3이므로 2만큼의 유량
 이러한 dfs와 bfs의 예시와 코드는 다음과 같다.
 
 ``` C
-printf("Hello world !\n");
-printf("code Block \n");
+#include <stdio.h>
+#include <stdlib.h>
+
+#define false 0
+#define true 1
+
+typedef struct incidentedge
+{
+	char iname;
+	int w;
+	struct incidentedge* next;
+}incidentedge;
+
+typedef struct vertex
+{
+	char vname;
+	int isvisit;
+	incidentedge* ihead;
+	struct vertex* next;
+}vertex;
+
+typedef struct
+{
+	vertex* vhead;
+}graph;
+
+void init(graph* g)
+{
+	g->vhead = NULL;
+}
+
+void makevertex(graph* g, char vname)
+{
+	vertex* v = (vertex*)malloc(sizeof(vertex));
+	v->vname = vname;
+	v->isvisit = false;
+	v->ihead = NULL;
+	v->next = NULL;
+
+	vertex* p = g->vhead;
+	if (p == NULL)
+		g->vhead = v;
+	else
+	{
+		while (p->next != NULL)
+			p = p->next;
+		p->next = v;
+	}
+}
+
+void makeincidentedge(vertex* v, char iname, int w)
+{
+	incidentedge* i = (incidentedge*)malloc(sizeof(incidentedge));
+	i->iname = iname;
+	i->w = w;
+	i->next = NULL;
+
+	incidentedge* p = v->ihead;
+	if (p == NULL)
+		v->ihead = i;
+	else
+	{
+		while (p->next != NULL)
+			p = p->next;
+		p->next = i;
+		
+	}
+}
+
+vertex* findvertex(graph* g, char vname)
+{
+	vertex* v = g->vhead;
+	while (v->vname != vname)
+		v = v->next;
+	return v;
+}
+
+void insertedge(graph* g, char v1, char v2, int w)
+{
+	vertex* v = findvertex(g, v1);
+	makeincidentedge(v, v2, w);
+	v = findvertex(g, v2);
+	makeincidentedge(v, v1, w);
+}
+
+void dfs(graph* g, char vname)
+{
+	vertex* v = findvertex(g, vname);
+	incidentedge* p;
+
+	if (v->isvisit == false)
+	{
+		v->isvisit = true;
+		printf("(%c) ", v->vname);
+	}
+
+	for (p = v->ihead; p != NULL; p = p->next)
+	{
+		v = findvertex(g, p->iname);
+		if (v->isvisit == false)
+			dfs(g, v->vname);
+	}
+}
+
+void print(graph* g)
+{
+	vertex* v = g->vhead;
+	incidentedge* i;
+	for (; v != NULL; v = v->next)
+	{
+		printf("(%c) : ", v->vname);
+		for (i = v->ihead; i != NULL; i = i->next)
+			printf("(%c,%d) ", i->iname, i->w);
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void bfs(graph* g, char vname)
+{
+	vertex* v = findvertex(g, vname);
+	incidentedge* p;
+	vertex* q;
+
+	if (v->isvisit == false)
+	{
+		v->isvisit = true;
+		printf("(%c) ", v->vname);
+	}
+
+	while (v != NULL)
+	{
+		for (p = v->ihead; p != NULL; p = p->next)
+		{
+			q = findvertex(g, p->iname);
+			if (q->isvisit == false)
+			{
+				q->isvisit = true;
+				printf("(%c) ", q->vname);
+			}
+		}
+		v = v->next;
+	}
+}
+
+void main()
+{
+	graph g;
+	init(&g);
+
+	makevertex(&g, 'a');
+	makevertex(&g, 'b');
+	makevertex(&g, 'c');
+	makevertex(&g, 'd');
+	makevertex(&g, 'e');
+
+	insertedge(&g, 'a', 'b', 1);
+	insertedge(&g, 'a', 'c', 2);
+	insertedge(&g, 'a', 'e', 3);
+	insertedge(&g, 'b', 'c', 4);
+	insertedge(&g, 'c', 'd', 6);
+	insertedge(&g, 'c', 'e', 7);
+	insertedge(&g, 'd', 'e', 5);
+
+	print(&g);
+	dfs(&g, 'a'); printf("\n");       or  //dfs(&g, 'a'); printf("\n");
+	//bfs(&g, 'a'); printf("\n");         bfs(&g, 'a'); printf("\n"); 
+}
 ```
 
 ## Ford-Fulkerson Algorithm 방식
