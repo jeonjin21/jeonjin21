@@ -299,6 +299,95 @@ S->2->1->T의 증가 경로를 찾아 낼 수 있다.
 
 더 이상 증가 경로의 탐색이 이루어지지 않으므로, 총 2만큼의 유량을 흘려 보낼 수 있다.
 
+포드-풀커슨 알고리즘의 코드는 다음과 같다.
+
+``` C
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+#define inf 9999
+#define max_v 50
+
+using namespace std;
+
+int V;
+int capacity[max_v][max_v];
+int flow[max_v][max_v];
+
+int networkflow(int source, int sink)
+{
+	memset(flow, 0, sizeof(flow));
+
+	int totalflow = 0;   // 플로우를 0으로 초기화
+
+	while(true)  // bfs를 통하여 경로 탐색
+    {
+		vector<int> parent(max_v, -1);
+		queue<int> q;
+
+		parent[source] = source;
+		q.push(source);
+		while(!q.empty() && parent[sink] == -1)
+        {
+			int here = q.front();
+			q.pop();
+
+			for(int there = 0 ; there < V ; there++)  // 잔여 용량이 남아있는 간선을 탐색
+            {
+				if(capacity[here][there] - flow[here][there] > 0 && parent[there] == -1)
+                {
+					q.push(there);
+					parent[there] = here;
+				}
+			}
+		}
+
+		if(parent[sink] == -1) break;  // 증가 가능 경로가 탐색 안 될 시 종료
+
+		// 증가 경로를 통해 얼마나 보낼지 결정
+		int amount = inf;
+		for(int p = sink ; p != source ; p = parent[p])
+        {
+			amount = min(capacity[parent[p]][p] - flow[parent[p]][p], amount);
+		}
+
+		// 증가 경로로 유량을 흘려 보냄
+		for(int p = sink ; p != source ; p = parent[p])
+        {
+			flow[parent[p]][p] += amount;
+			flow[p][parent[p]] -= amount;  // 조건2. 유량의 대칭성
+		}
+
+		totalflow += amount;
+	}
+
+	return totalflow;
+}
+
+int main()
+{
+	V = 4;
+
+	capacity[0][1] = 1;
+	capacity[0][2] = 2;
+	
+	capacity[1][2] = 1;
+	capacity[1][3] = 3;
+
+	capacity[2][3] = 1;
+
+	int totalflow = networkflow(0, 3);
+	cout << totalflow << endl;
+
+	return 0;
+}
+
+```
+
+
 이러한 포드-풀커슨 알고리즘에도 문제점이 있는데,
 다음의 구체적인 예시를 통해 문제점을 파악할 수 있다.
 
