@@ -456,6 +456,67 @@ int main()
 동작하는 포드-풀커슨 알고리즘보다 좋은 성능을 보이며, flow가 커질수록 성능의 차이는 더 크다.
 
 
+# 정렬 알고리즘
+
+### 버블 정렬
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define size 32
+
+void makelist(int list[])
+{
+	for (int i = 0; i < size; i++)
+		list[i] = rand() % 100 + 1;
+}
+
+void printlist(int list[])
+{
+	for (int i = 0; i < size; i++)
+		printf("[%d] ", list[i]);
+	printf("\n");
+}
+
+void bubblesort(int list[])
+{
+	int j;
+	int temp;
+
+	for (int i = 1; i < size; i++)
+	{
+		temp = list[i];
+		j = i - 1;
+		while (0 <= j && temp < list[j])
+		{
+			list[j + 1] = list[j];
+			j--;
+		}
+		list[j + 1] = temp;
+	}
+}
+
+void main()
+{
+	clock_t finish, start;
+	double duration;
+	int arr[size];
+	srand(time(NULL));
+
+	makelist(arr);
+	printlist(arr);
+
+	start = clock();
+	bubblesort(arr);
+	printlist(arr);
+	finish = clock();
+	duration = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("걸린 시간: %lf", duration);
+}
+```
+
+
 <!--
 **jeonjin21/jeonjin21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
