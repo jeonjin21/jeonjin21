@@ -515,6 +515,422 @@ void main()
 	printf("걸린 시간: %lf", duration);
 }
 ```
+![컴알 9주차과제-버블정렬](https://user-images.githubusercontent.com/101388167/166713472-075cc610-4c01-4549-926c-0beeae0a9c69.png)
+![컴알 9주차과제-버블정렬-그래프](https://user-images.githubusercontent.com/101388167/166715067-d1f084a5-59fb-4346-b9c8-5cfe26e463cc.png)
+
+
+### 선택 정렬
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define SIZE 32
+
+void makelist(int list[])
+{
+	for (int i = 0; i < SIZE; i++)
+		list[i] = rand() % 100 + 1;
+}
+
+void printlist(int list[])
+{
+	for (int i = 0; i < SIZE; i++)
+		printf("%d ", list[i]);
+	printf("\n");
+}
+
+void selectionsort(int list[])
+{
+	int min, temp;
+	for (int i = 0; i < SIZE - 1; i++)
+	{
+		min = i;
+		for (int j = i + 1; j < SIZE; j++)
+			if (list[j] < list[min])
+				min = j;
+		temp = list[min];
+		list[min] = list[i];
+		list[i] = temp;
+	}
+}
+
+void main()
+{
+	clock_t finish, start;
+	double duration;
+	int list[SIZE];
+	srand(time(NULL));
+
+	makelist(list);
+	printlist(list);
+
+	start = clock();
+	selectionsort(list);
+	printlist(list);
+	finish = clock();
+	duration = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("걸린 시간: %lf\n", duration);
+}
+```
+![컴알 9주차과제-선택정렬](https://user-images.githubusercontent.com/101388167/166714870-15e5a4d3-1074-4db9-8c5f-093d349592ac.png)
+![컴알 9주차과제-선택정렬-그래프](https://user-images.githubusercontent.com/101388167/166715090-caaa1769-441f-4e09-9a01-b20de45ff1aa.png)
+
+
+### 삽입 정렬
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define SIZE 32
+
+void makelist(int list[])
+{
+	for (int i = 0; i < SIZE; i++)
+		list[i] = rand() % 100 + 1;
+}
+
+void printlist(int list[])
+{
+	for (int i = 0; i < SIZE; i++)
+		printf("%d ", list[i]);
+	printf("\n");
+}
+
+void insertionsort(int list[])
+{
+	int i, j, key;
+	for (i = 1; i < SIZE; i++)
+	{
+		key = list[i];
+		for (j = i - 1; j >= 0 && list[j] > key; j--)
+			list[j + 1] = list[j];
+		list[j + 1] = key;
+	}
+}
+
+void main()
+{
+	clock_t finish, start;
+	double duration;
+	int list[SIZE];
+	srand(time(NULL));
+
+	makelist(list);
+	printlist(list);
+
+	start = clock();
+	insertionsort(list);
+	printlist(list);
+	finish = clock();
+	duration = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("걸린 시간: %lf\n", duration);
+}
+```
+![컴알 9주차과제-삽입정렬](https://user-images.githubusercontent.com/101388167/166714891-8dc605a7-1801-47a8-8bdc-c9aa11d880aa.png)
+![컴알 9주차과제-삽입정렬-그래프](https://user-images.githubusercontent.com/101388167/166715096-767b0008-b18f-48fe-b22b-50081740c0d9.png)
+
+
+### 쉘 정렬
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define size 32
+#define swap(a,b) {int temp; temp=a; a=b; b=temp;}
+
+void makelist(int list[])
+{
+	for (int i = 0; i < size; i++)
+		list[i] = rand() % 100 + 1;
+}
+
+void printlist(int list[])
+{
+	for (int i = 0; i < size; i++)
+		printf("[%d] ", list[i]);
+	printf("\n");
+}
+
+void insertionsort(int list[],int num, int step)
+{
+	int i, j;
+	for (i = step; i < num; i += step)
+	{
+		for (j = i; j > 0; j -= step)
+		{
+			if (list[j - step] > list[j])
+			{
+				swap(list[j - step], list[j]);
+			}
+			else
+				break;
+		}
+	}
+}
+
+void shellsort(int list[])
+{
+	int i, step;
+
+	for (step = size / 2; step > 0; step /= 2)
+	{
+		for (i = 0; i < step; i++)
+		{
+			insertionsort(list + i, size - 1, step);
+		}
+	}
+}
+
+void main()
+{
+	clock_t finish, start;
+	double duration;
+	int arr[size];
+	srand(time(NULL));
+
+	makelist(arr);
+	printlist(arr);
+
+	start = clock();
+	shellsort(arr);
+	printlist(arr);
+	finish = clock();
+	duration = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("걸린 시간: %lf", duration);
+}
+
+```
+![컴알 9주차과제-쉘정렬](https://user-images.githubusercontent.com/101388167/166714900-2056d700-6fbf-400a-b8f1-ab22f1e349a1.png)
+![컴알 9주차과제-쉘정렬-그래프](https://user-images.githubusercontent.com/101388167/166715104-e65b14db-6b68-4954-92b5-89be78f5a1cf.png)
+
+
+### 힙 정렬
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define size 100
+
+typedef int element;
+
+typedef struct heaptype
+{
+	element heap[size];
+	int n;
+}heaptype;
+
+void init(heaptype* ht)
+{
+	ht->n = 0;
+}
+
+void upheap(heaptype* ht)
+{
+	int i = ht->n;
+	int k = ht->heap[i];
+
+	while ((i != 1) && (k < ht->heap[i / 2]))
+	{
+		ht->heap[i] = ht->heap[i / 2];
+		i /= 2;
+	}
+	ht->heap[i] = k;
+}
+
+void downheap(heaptype* ht)
+{
+	int temp = ht->heap[1];
+	int p = 1;
+	int c = 2;
+
+	while (c <= ht->n)
+	{
+		if ((c < ht->n) && (ht->heap[c + 1] < ht->heap[c]))
+			c++;
+		if (temp <= ht->heap[c])
+			break;
+
+		ht->heap[p] = ht->heap[c];
+		p = c;
+		c *= 2;
+	}
+	ht->heap[p] = temp;
+}
+
+void insertitem(heaptype* ht, int k)
+{
+	ht->n++;
+	ht->heap[ht->n] = k;
+	upheap(ht);
+}
+
+int removeitem(heaptype* ht)
+{
+	int k = ht->heap[1];
+	ht->heap[1] = ht->heap[ht->n];
+	ht->n--;
+	downheap(ht);
+	return k;
+}
+
+void heapsort(heaptype* ht1, element H[])
+{
+	heaptype ht2;
+	init(&ht2);
+
+	for (int i = 1; i <= ht1->n; i++)
+	{
+		ht2.heap[i] = ht1->heap[i];
+		ht2.n++;
+	}
+
+	for (int i = 1; i <= ht1->n; i++)
+		H[i] = removeitem(&ht2);
+}
+
+void inplaceheapsort(heaptype* ht)     //제자리 정렬
+{
+	int n = ht->n;
+	int key;
+	for (int i = 0; i < n; i++)
+	{
+		key = removeitem(ht);
+		ht->heap[ht->n + 1] = key;
+	}
+}
+
+void printArray(int H[], int n)
+{
+	for (int i = 1; i <= n; i++)
+		printf("[%d] ", H[i]);
+	printf("\n");
+}
+
+void main()
+{
+	clock_t finish, start;
+	double duration;
+	heaptype ht;
+	init(&ht);
+	element H[size];
+
+	srand(time(NULL));
+
+	start = clock();
+	for (int i = 0; i < 131022; i++)
+	{
+		int k = rand() % 100 + 1;
+		insertitem(&ht, k);
+		printf("[%d] ", k);
+	}
+	printf("\n");
+	printf("\n");
+
+	heapsort(&ht, H);
+	printf("정방향: ");
+	printArray(H, ht.n);
+	finish = clock();
+	duration = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("걸린 시간: %lf\n", duration);
+
+	printf("\n");
+	printf("역방향: ");
+	int n = ht.n;
+	inplaceheapsort(&ht);
+	printArray(ht.heap, n);
+}
+```
+![컴알 9주차과제-힙정렬](https://user-images.githubusercontent.com/101388167/166714930-0aacd6c9-d242-45f7-94dc-3d138fcadf18.png)
+![컴알 9주차과제-힙정렬-그래프](https://user-images.githubusercontent.com/101388167/166715117-b915bfae-b7bd-41af-949f-35f123ab3e94.png)
+
+
+### 퀵 정렬
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define SIZE 32
+#define SWAP(x,y,t) ((t)=(x), (x)=(y), (y)=(t))
+
+void makelist(int list[])
+{
+	for (int i = 0; i < SIZE; i++)
+		list[i] = rand() % 100 + 1;
+}
+
+void printlist(int list[])
+{
+	for (int i = 0; i < SIZE; i++)
+		printf("%d ", list[i]);
+	printf("\n");
+}
+
+int partition(int list[], int left, int right)
+{
+	int pivot, temp, low, high;
+
+	pivot = list[left];
+	low = left;
+	high = right + 1;
+
+	do
+	{
+		do
+		{
+			low++;
+		} while (list[low] < pivot);
+
+		do
+		{
+			high--;
+		} while (list[high] > pivot);
+
+		if (low < high)
+			SWAP(list[low], list[high], temp);
+
+	} while (low < high);
+
+	SWAP(list[left], list[high], temp);
+	return high;
+}
+
+void quicksort(int list[], int left, int right)
+{
+	if (left < right)
+	{
+		int q = partition(list, left, right);
+		quicksort(list, left, q - 1);
+		quicksort(list, q + 1, right);
+	}
+}
+
+void main()
+{
+	clock_t finish, start;
+	double duration;
+	int list[SIZE];
+	int sorted[SIZE];
+	srand(time(NULL));
+
+	makelist(list);
+	printlist(list);
+
+	start = clock();
+	quicksort(list, 0, SIZE - 1);
+	printlist(list);
+	finish = clock();
+	duration = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("걸린 시간: %lf\n", duration);
+
+}
+```
+![컴알 9주차과제-퀵정렬](https://user-images.githubusercontent.com/101388167/166714920-3b33f20e-22ad-4bd8-918a-fb2eba02d019.png)
+![컴알 9주차과제-퀵정렬-그래프](https://user-images.githubusercontent.com/101388167/166715134-bdf9e2c3-2285-42ee-8f4d-d93e9ee07b72.png)
 
 
 <!--
