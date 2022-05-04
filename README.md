@@ -933,6 +933,11 @@ void main()
 ![컴알 9주차과제-퀵정렬-그래프](https://user-images.githubusercontent.com/101388167/166715134-bdf9e2c3-2285-42ee-8f4d-d93e9ee07b72.png)
 
 
+### 성능 비교를 위한 각 정렬의 종합 그래프
+![컴알 9주차과제-종합 그래프](https://user-images.githubusercontent.com/101388167/166723451-dc4fb581-18e8-4cc8-b4c1-deb76e33a8b8.png)
+
+위의 색깔 부터 순서대로 버블 정렬, 선택 정렬, 삽입 정렬, 힙 정렬, 쉘 정렬, 퀵 정렬이다.
+
 <!--
 **jeonjin21/jeonjin21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
