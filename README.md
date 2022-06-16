@@ -949,7 +949,7 @@ void main()
 상관분석은 간단히 말하자면 변수들이 서로 간에 얼마나 조밀하게 직선적인 관계를 형성하는 지를 파악하는 통계적 기법이다.
 상관분석을 통해 산점도(Scatter plot)를 구상해 낼 수 있다. 산점도란 직교 좌표계를 이용하여 두 변수 간 관계를 나타내는 방법이다.
 
-그림1
+![컴알 기말-3](https://user-images.githubusercontent.com/101388167/174134421-6f25b126-a9f5-4518-ad79-27cfbd6862dd.png)
 
 위와 같이 x축을 bmi(체질량지수), y축을 target(당뇨병의 수치)로 두고 두 변수간의 관계를 산점도로 나타내보면 대략 
 양의 관계를 이루고 있음을 파악 할 수 있다.
@@ -960,7 +960,7 @@ void main()
 앞서 살펴 본 상관분석에서는 산점도에서 점들의 분포를 통해 일정 패턴을 파악한 후에 서로 다른 두 변수간의 선형 관계를 파악했다면 회기분석은 여기서
 더 나아가 일정한 패턴을 활용하여 무엇인가를 예측까지 해내는 분석이라고 볼 수 있다.
 
-표 사진
+![컴알 기말-1](https://user-images.githubusercontent.com/101388167/174134401-8c092db1-9b0a-49cc-8a6b-37bcdce002a0.png)
 
 위의 표는 442명의 사람들을 상대로 10가지의 특성들을 나열한 것이다.
 그리고 상관분석을 통하여 target(당뇨병의 수치)와 bmi(체질량지수) 간의 일정한 패턴을 확인 할 수 있었고, 0.59의 상관계수를 통해
@@ -977,13 +977,16 @@ Y = B0 + B1*X + &
 그리고 이 때 일반적으로 많이 사용되는 방법을 최소제곱법이라고 한다. 위에 제시한 데이터프레임에서 Y는 index로 두고 X는 bmi로 두고 
 다음의 과정을 거쳐 회기 분석을 돌려주면 B0는 152.13348416. B1은 949.43526038이 나온다. 
 
-표 사진
+![컴알 기말-2](https://user-images.githubusercontent.com/101388167/174134414-bf02d42a-b61d-4243-9656-ebf6bedf7c8f.png)
 
 위에 제시된 데이터프레임에 구한 B0, B1을 대입하고 원하는 두 변수의 관계를 회귀식으로 표현하면 Target= 949*bmi + 152이다.
 이는 곧 bmi가 1 증가할 때마다 Target의 수치가 949의 양만큼 증가한다고 볼 수 있는 것이다.
 이 회귀식을 그려보면 다음과 같다.
 
+![컴알 기말-3](https://user-images.githubusercontent.com/101388167/174134421-6f25b126-a9f5-4518-ad79-27cfbd6862dd.png)
+                                               =>
 
+![컴알 기말-4](https://user-images.githubusercontent.com/101388167/174134425-aea2c176-7391-40cf-937e-e9bd2e7f983f.png)
 
 <!--
 **jeonjin21/jeonjin21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
