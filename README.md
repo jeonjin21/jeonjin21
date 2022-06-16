@@ -1015,6 +1015,7 @@ Y = B0 + B1*X + &
 온도가 높을수록 확률이 0.5에 근사하는 random search가 되는 반면, 온도가 낮아지면 확률이 1에 근사해 ordinary hill climbing이 된다.
 정리하자면 초반에는 변동이 심하지만 해에 근접할수록 T(온도)가 감소하여 보다 세밀한 진행이 이루어진다.
 
+![컴알 기말-5](https://user-images.githubusercontent.com/101388167/174142620-cd0f8ea9-3fe9-439b-b5a7-a9a277d5e75c.png)
 
 <!--
 **jeonjin21/jeonjin21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
