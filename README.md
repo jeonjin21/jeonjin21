@@ -1093,6 +1093,9 @@ int main() {
 }
 ``` 
 
+![컴알 기말-6](https://user-images.githubusercontent.com/101388167/174146525-c1e52631-3395-4285-b659-600794903384.png)
+
+
 <!--
 **jeonjin21/jeonjin21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
