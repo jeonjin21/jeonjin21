@@ -1017,6 +1017,82 @@ Y = B0 + B1*X + &
 
 ![컴알 기말-5](https://user-images.githubusercontent.com/101388167/174142620-cd0f8ea9-3fe9-439b-b5a7-a9a277d5e75c.png)
 
+``` C
+#include <bits/stdc++.h>
+#include <random>
+ 
+using namespace std;
+int n;
+int grid[40][40];
+ 
+void turn(int x, int y) { 
+	if (y == 0) {
+		for (int i = 0; i < n; i++)
+			grid[x][i] = 1 - grid[x][i];
+	}
+	else {
+		for (int i = 0; i < n; i++)
+			grid[i][x] = 1 - grid[i][x];
+	}
+}
+ 
+void func() {
+	for (int i = 0; i < n; i++) {
+		int s = 0;
+		for (int j = 0; j < n; j++)
+			s += grid[j][i];
+		if (s > (n / 2)) turn(i, 1);
+	}
+}
+ 
+int scoring() {
+	int s = 0;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			s += grid[i][j];
+	return s;
+}
+ 
+double t=1, d=0.9999, k=10, lim=0.0005;
+std::mt19937_64 seed(1919);
+std::uniform_real_distribution<double> rng(0, 1);
+ 
+int ret = 999;
+ 
+void simulated_annealing() {
+	double e1, e2;
+	int ori[40][40];
+	while (t > lim) {
+		e1 = scoring();
+		for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) ori[i][j] = grid[i][j];
+		int pos = rand() % n;
+		turn(pos, 0);
+		func();
+		e2 = scoring();
+ 
+		double p = exp((e1 - e2) / (k*t));
+		if (p < rng(seed)) for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) grid[i][j] = ori[i][j];
+		t *= d;
+ 
+		ret = min(ret, scoring());
+	}
+}
+ 
+int main() {
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			char ch;
+			scanf(" %c", &ch);
+			grid[i][j] = (ch == 'H' ? 0 : 1);
+		}
+	}
+	simulated_annealing();
+	printf("%d", ret);
+	return 0;
+}
+``` 
+
 <!--
 **jeonjin21/jeonjin21** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
